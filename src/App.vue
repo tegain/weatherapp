@@ -25,6 +25,10 @@
     box-sizing: border-box;
   }
 
+  html {
+    font-size: 1rem;
+  }
+
   body {
     margin: 0;
   }

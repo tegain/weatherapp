@@ -1,10 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import VueResource from 'vue-resource'
-// import API from '@/api/index'
+import API from '@/api/index'
 
 Vue.use(Vuex)
-Vue.use(VueResource)
 
 export default new Vuex.Store({
   state: {
@@ -66,14 +64,13 @@ export default new Vuex.Store({
           console.log(`Searching forecast for ${terms.city}...`)
 
           // Ajax call here
-          Vue.$http.get('https://jsonplaceholder.typicode.com/users').then((response) => { console.log(response) })
-          /* API.searchCity()
+          API.searchCity()
             .then((response) => {
               resolve(response)
               context.commit('changeFavCity', searchedCity)
             }, (response) => {
               reject(response)
-            }) */
+            })
         } else {
           console.error('City name can\'t be empty')
         }
@@ -89,6 +86,7 @@ export default new Vuex.Store({
   mutations: {
     changeFavCity (state, searchedCity) {
       state.favCity = searchedCity
+      // state.cities[0].name = searchedCity
       localStorage.setItem('favCity', searchedCity)
     },
 
