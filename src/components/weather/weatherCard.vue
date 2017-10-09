@@ -1,6 +1,6 @@
 <template>
   <div id="app-weather" class="app--weather_card">
-    <h1>{{ $store.state.cities[0].name }}</h1>
+    <h1>{{ $store.state.favCity | capitalize }}</h1>
     <span class="temperature">{{ $store.state.cities[0].main.temp - 273.15 }}</span>
     <span class="unit">{{ unit }}</span>
   </div>
@@ -19,6 +19,14 @@
     methods: {
       getTemperature () {
         return 'coucou'
+      }
+    },
+
+    filters: {
+      capitalize: function (value) {
+        if (!value) return ''
+        value = value.toString()
+        return value.charAt(0).toUpperCase() + value.slice(1)
       }
     }
   }

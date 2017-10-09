@@ -1,7 +1,8 @@
 import Vue from 'vue'
-import VueResource from 'vue-resource'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
-Vue.use(VueResource)
+Vue.use(VueAxios, axios)
 
 export default {
   keys: {
@@ -22,6 +23,6 @@ export default {
     // let URL = 'api.openweathermap.org/data/2.5/find?q=' + city + '&units=' + unit + '&lang=' + lang + '&APPID=' + this.keys.OWMPublic
 
     let URL = 'https://jsonplaceholder.typicode.com/users'
-    return this.$http.get(URL)
+    return Vue.axios.get(URL)
   }
 }

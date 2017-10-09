@@ -1,6 +1,6 @@
 <template>
   <div id="app-search" class="app--search">
-    <form action="#" v-on:submit="searchCity">
+    <form action="#" v-on:submit.prevent="searchCity">
       <input id="search-city" type="text" placeholder="Search city" v-model="searchTerm" required>
 
       <input type="submit" value="Search">
@@ -18,7 +18,6 @@
 
     methods: {
       searchCity: function (e) {
-        e.preventDefault()
         this.$store.dispatch('searchCity', { city: this.searchTerm })
           .then((success) => {
             console.info(success)
