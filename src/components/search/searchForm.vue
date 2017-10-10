@@ -1,5 +1,5 @@
 <template>
-  <div id="app-search" class="app--search">
+  <div class="app--search">
     <form action="#" v-on:submit.prevent="searchCity">
       <input id="search-city" type="text" placeholder="Search city" v-model="searchTerm" required>
 

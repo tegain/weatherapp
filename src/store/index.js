@@ -9,6 +9,7 @@ export default new Vuex.Store({
     favCity: localStorage.getItem('favCity') || null,
     favUnit: localStorage.getItem('favUnit') || 'metric',
     favLang: localStorage.getItem('favLang') || 'en',
+    userSettings: localStorage.getItem('userSettings') || null,
     cities: [
       {
         'coord': {
@@ -77,6 +78,25 @@ export default new Vuex.Store({
       })
     },
 
+    submitSettings (context, settings) {
+      let settingsCity = settings.city.trim()
+
+      return new Promise((resolve, reject) => {
+        if (settingsCity.length > 0) {
+          const userSettings = {
+            city: settings.city,
+            unit: settings.unit,
+            lang: settings.lang
+          }
+
+          resolve(userSettings)
+          context.commit('addUserSettings', userSettings)
+        } else {
+          reject('City name can\'t be empty')
+        }
+      })
+    },
+
     convertUnit (tk, tc) {
       // T(°C) = T(K) - 273.15
       console.log('convertUnit()')
@@ -88,6 +108,11 @@ export default new Vuex.Store({
       state.favCity = searchedCity
       // state.cities[0].name = searchedCity
       localStorage.setItem('favCity', searchedCity)
+    },
+
+    addUserSettings (state, settings) {
+      state.userSettings = settings
+      localStorage.setItem('userSettings', JSON.stringify(settings))
     },
 
     changeFavUnit (state, unit) {
