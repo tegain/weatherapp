@@ -6,6 +6,8 @@
 
 <script>
   export default {
+    name: 'appBackground',
+
     data () {
       return {
         picture: 'chengdu'

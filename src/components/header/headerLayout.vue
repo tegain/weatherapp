@@ -1,13 +1,13 @@
 <template>
   <div id="app-header" class="app--header">
-    <a href="#">Home</a>
+    <router-link :to="{ name: 'home' }">App</router-link>
     <app-search></app-search>
   </div>
 </template>
 
 <script>
   export default {
-
+    name: 'appHeader'
   }
 </script>
 

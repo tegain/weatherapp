@@ -1,13 +1,6 @@
 <template>
   <div id="app" class="app">
-    <app-background></app-background>
-
-    <div id="app-main" class="app--main">
-      <app-header></app-header>
-      <div id="app-weather" class="app--weather">
-        <weather-card></weather-card>
-      </div>
-    </div>
+    <router-view></router-view>
   </div>
 </template>
 

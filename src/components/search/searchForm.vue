@@ -10,6 +10,8 @@
 
 <script>
   export default {
+    name: 'searchForm',
+
     data () {
       return {
         searchTerm: ''
