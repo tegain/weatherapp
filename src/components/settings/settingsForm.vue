@@ -9,9 +9,9 @@
       </select>
 
       <select name="search-lang" id="search-lang" v-model="settingsLang">
-        <option value="lang-fr">FR</option>
-        <option value="lang-en">EN</option>
-        <option value="lang-zh">ZH</option>
+        <option value="en" selected="selected">EN</option>
+        <option value="fr">FR</option>
+        <option value="zh_cn">ZH</option>
       </select>
 
       <input type="submit" value="Search">
@@ -34,6 +34,7 @@
     methods: {
       submitSettings () {
         this.$store.dispatch('submitSettings', { city: this.settingsCity, unit: this.settingsUnit, lang: this.settingsLang })
+        this.$router.push('/')
         // console.log(`City: ${this.settingsCity} ; Unit: ${this.settingsUnit} ; Lang: ${this.settingsLang}`)
       }
     }

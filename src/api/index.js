@@ -14,8 +14,9 @@ export default {
     OWMPublic: '8d0eaadfe6a385e8c8e254bf8e055417'
   },
 
-  searchPicture () {
+  searchPicture (city, perPage) {
     // Search for Flickr picture
+    // let URL = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=' + this.keys.flickrPublic + '&tags=' + city + '&per_page=' + perPage + '&format=json&nojsoncallback=1'
   },
 
   searchCity (city, unit, lang) {

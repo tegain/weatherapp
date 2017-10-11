@@ -9,7 +9,7 @@ export default new Vuex.Store({
     favCity: localStorage.getItem('favCity') || null,
     favUnit: localStorage.getItem('favUnit') || 'metric',
     favLang: localStorage.getItem('favLang') || 'en',
-    userSettings: localStorage.getItem('userSettings') || null,
+    userSettings: JSON.parse(localStorage.getItem('userSettings')) || null,
     cities: [
       {
         'coord': {
@@ -57,18 +57,23 @@ export default new Vuex.Store({
   },
 
   actions: {
-    searchCity (context, terms) {
+    searchCity ({ commit, dispatch }, terms) {
       let searchedCity = terms.city.trim()
 
       return new Promise((resolve, reject) => {
         if (searchedCity.length > 0) {
-          console.log(`Searching forecast for ${terms.city}...`)
+          let searchedUnit = this.state.userSettings.unit
+          let searchedLang = this.state.userSettings.lang
+
+          console.log(`Searching ${searchedLang} forecast for ${terms.city} in ${searchedUnit}...`)
 
           // Ajax call here
-          API.searchCity()
+          API.searchCity(searchedCity, searchedUnit, searchedLang)
             .then((response) => {
               resolve(response)
-              context.commit('changeFavCity', searchedCity)
+
+              // this.dispatch('searchPicture', searchedCity)
+              commit('changeFavCity', searchedCity)
             }, (response) => {
               reject(response)
             })
@@ -78,14 +83,21 @@ export default new Vuex.Store({
       })
     },
 
+    searchPicture (city) {
+      console.log(city)
+    },
+
     submitSettings (context, settings) {
       let settingsCity = settings.city.trim()
 
       return new Promise((resolve, reject) => {
         if (settingsCity.length > 0) {
+          let convertedUnit = (settings.unit === 'metric') ? '°C' : '°F'
+
           const userSettings = {
             city: settings.city,
             unit: settings.unit,
+            unitConverted: convertedUnit,
             lang: settings.lang
           }
 
@@ -95,28 +107,26 @@ export default new Vuex.Store({
           reject('City name can\'t be empty')
         }
       })
-    },
-
-    convertUnit (tk, tc) {
-      // T(°C) = T(K) - 273.15
-      console.log('convertUnit()')
     }
   },
 
   mutations: {
+    /**
+     * @param state
+     * @param searchedCity
+     * Update state values: replace 'state.userSettings.city' by the searched city, and edit local storage item
+     */
     changeFavCity (state, searchedCity) {
-      state.favCity = searchedCity
-      // state.cities[0].name = searchedCity
-      localStorage.setItem('favCity', searchedCity)
+      if (state.userSettings !== null) {
+        state.userSettings.city = searchedCity
+
+        localStorage.setItem('userSettings', JSON.stringify(state.userSettings))
+      }
     },
 
     addUserSettings (state, settings) {
       state.userSettings = settings
       localStorage.setItem('userSettings', JSON.stringify(settings))
-    },
-
-    changeFavUnit (state, unit) {
-      // Add Unit to localStorage and change state favUnit value
     }
   }
 })

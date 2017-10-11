@@ -1,8 +1,8 @@
 <template>
   <div id="app-weather" class="app--weather_card">
-    <h1>{{ $store.state.favCity | capitalize }}</h1>
-    <span class="temperature">{{ $store.state.cities[0].main.temp - 273.15 }}</span>
-    <span class="unit">{{ unit }}</span>
+    <h1>{{ $store.state.userSettings.city | capitalize }}</h1>
+    <span class="temperature">{{ $store.state.cities[0].main.temp }}</span>
+    <span class="unit">{{ $store.state.userSettings.unitConverted }}</span>
   </div>
 </template>
 
@@ -29,6 +29,10 @@
         if (!value) return ''
         value = value.toString()
         return value.charAt(0).toUpperCase() + value.slice(1)
+      },
+
+      convert: function () {
+
       }
     }
   }

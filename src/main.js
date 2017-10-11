@@ -12,6 +12,23 @@ Components.forEach((component) => {
   Vue.component(component.name, component.template)
 })
 
+/**
+ * When user tries to access 'home' view,
+ * Check for user settings in localStorage.
+ * If there are none, redirects to settings view.
+ */
+router.beforeEach((to, from, next) => {
+  if (to.name === 'home') {
+    if (store.state.userSettings == null) {
+      next('/settings')
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
