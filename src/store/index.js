@@ -57,7 +57,7 @@ export default new Vuex.Store({
   },
 
   actions: {
-    searchCity ({ commit, dispatch }, terms) {
+    searchCity (context, terms) {
       let searchedCity = terms.city.trim()
 
       return new Promise((resolve, reject) => {
@@ -70,10 +70,9 @@ export default new Vuex.Store({
           // Ajax call here
           API.searchCity(searchedCity, searchedUnit, searchedLang)
             .then((response) => {
-              resolve(response)
+              resolve(response.data)
 
-              // this.dispatch('searchPicture', searchedCity)
-              commit('changeFavCity', searchedCity)
+              context.commit('changeFavCity', searchedCity)
             }, (response) => {
               reject(response)
             })
@@ -83,8 +82,15 @@ export default new Vuex.Store({
       })
     },
 
-    searchPicture (city) {
-      console.log(city)
+    searchPicture (context, city) {
+      return new Promise((resolve, reject) => {
+        if (city) {
+          // let reponse = JSON.stringify(city)
+          resolve(console.log('city: ' + city))
+        } else {
+          reject(console.error('city not found'))
+        }
+      })
     },
 
     submitSettings (context, settings) {
