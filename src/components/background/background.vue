@@ -1,6 +1,7 @@
 <template>
   <div id="app-background" class="app--background">
-    <div class="app--background_picture" :style="'background-image: url(//riz-cantonais.net/wp-content/uploads/2015/08/chengdu-home.jpg)'"></div>
+    <!--<div class="app&#45;&#45;background_picture" :style="'background-image: url(//riz-cantonais.net/wp-content/uploads/2015/08/chengdu-home.jpg)'"></div>-->
+    <div class="app--background_picture" :style="'background-image: url(' + $store.state.userSettings.pictureUrl + ')'"></div>
   </div>
 </template>
 
@@ -10,7 +11,7 @@
 
     data () {
       return {
-        picture: 'chengdu'
+        picture: this.$store.state.userSettings.pictureUrl
       }
     }
   }

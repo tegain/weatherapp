@@ -33,8 +33,11 @@
 
     methods: {
       submitSettings () {
-        this.$store.dispatch('submitSettings', { city: this.settingsCity, unit: this.settingsUnit, lang: this.settingsLang })
-        this.$router.push('/')
+        this.$store.dispatch('submitSettings', { city: this.settingsCity, unit: this.settingsUnit, lang: this.settingsLang }).then((success) => {
+          this.$store.dispatch('searchPicture', this.settingsCity).then((success) => {
+            this.$router.push('/')
+          })
+        })
         // console.log(`City: ${this.settingsCity} ; Unit: ${this.settingsUnit} ; Lang: ${this.settingsLang}`)
       }
     }

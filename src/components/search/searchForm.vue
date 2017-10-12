@@ -23,7 +23,6 @@
         this.$store.dispatch('searchCity', { city: this.searchTerm })
           .then((success) => {
             console.info(success)
-
             this.$store.dispatch('searchPicture', this.searchTerm)
           })
           .catch((error) => {

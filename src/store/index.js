@@ -85,8 +85,10 @@ export default new Vuex.Store({
     searchPicture (context, city) {
       return new Promise((resolve, reject) => {
         if (city) {
-          // let reponse = JSON.stringify(city)
-          resolve(console.log('city: ' + city))
+          const picture = city
+
+          resolve(console.log('city: ' + picture))
+          context.commit('setPicture', picture)
         } else {
           reject(console.error('city not found'))
         }
@@ -108,7 +110,7 @@ export default new Vuex.Store({
           }
 
           resolve(userSettings)
-          context.commit('addUserSettings', userSettings)
+          context.commit('setUserSettings', userSettings)
         } else {
           reject('City name can\'t be empty')
         }
@@ -125,14 +127,22 @@ export default new Vuex.Store({
     changeFavCity (state, searchedCity) {
       if (state.userSettings !== null) {
         state.userSettings.city = searchedCity
-
         localStorage.setItem('userSettings', JSON.stringify(state.userSettings))
       }
     },
 
-    addUserSettings (state, settings) {
+    setUserSettings (state, settings) {
       state.userSettings = settings
       localStorage.setItem('userSettings', JSON.stringify(settings))
+    },
+
+    setPicture (state, city) {
+      // if (state.userSettings.pictureUrl == null) {
+      state.userSettings.pictureUrl = city.toLowerCase()
+      localStorage.setItem('userSettings', JSON.stringify(state.userSettings))
+      /* } else {
+        state.userSettings.pictureUrl = state.userSettings.pictureUrl
+      } */
     }
   }
 })
