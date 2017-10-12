@@ -14,9 +14,10 @@ export default {
     OWMPublic: '8d0eaadfe6a385e8c8e254bf8e055417'
   },
 
-  searchPicture (city, perPage) {
+  searchPicture (city, perPage = 20) {
     // Search for Flickr picture
-    // let URL = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=' + this.keys.flickrPublic + '&tags=' + city + '&per_page=' + perPage + '&format=json&nojsoncallback=1'
+    let URL = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=' + this.keys.flickrPublic + '&tags=' + city + '&per_page=' + perPage + '&format=json&nojsoncallback=1&sort=interestingness-desc&content_type=1&geo_context=2&accuracy=10'
+    return Vue.axios.get(URL)
   },
 
   searchCity (city, unit, lang) {

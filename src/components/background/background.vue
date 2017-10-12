@@ -1,7 +1,11 @@
 <template>
   <div id="app-background" class="app--background">
     <!--<div class="app&#45;&#45;background_picture" :style="'background-image: url(//riz-cantonais.net/wp-content/uploads/2015/08/chengdu-home.jpg)'"></div>-->
-    <div class="app--background_picture" :style="'background-image: url(' + $store.state.userSettings.pictureUrl + ')'"></div>
+    <div class="app--background_picture" :style="'background-image: url(' + $store.state.userSettings.pictureUrl + ')'">
+
+      <div style="color:#fff; margin:200px;">{{ $store.state.userSettings.pictureUrl }}</div>
+
+    </div>
   </div>
 </template>
 

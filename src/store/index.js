@@ -85,10 +85,35 @@ export default new Vuex.Store({
     searchPicture (context, city) {
       return new Promise((resolve, reject) => {
         if (city) {
-          const picture = city
+          const picturesPerRequest = 20
 
-          resolve(console.log('city: ' + picture))
-          context.commit('setPicture', picture)
+          /**
+           * @doc Flickr API
+           * Photos Search: https://www.flickr.com/services/api/flickr.photos.search.html
+           * URLS: https://www.flickr.com/services/api/misc.urls.html
+           */
+          API.searchPicture(city, picturesPerRequest)
+            .then((response) => {
+              resolve(console.log(response))
+
+              // Build Picture URL
+              let randomPictureID = parseInt(Math.random() * picturesPerRequest)
+              console.log(randomPictureID)
+              const datas = response.data.photos
+              const picture = {
+                id: datas.photo[randomPictureID].id,
+                farmId: datas.photo[randomPictureID].farm,
+                serverId: datas.photo[randomPictureID].server,
+                secret: datas.photo[randomPictureID].secret,
+                size: 'h'
+              }
+
+              const pictureURL = `https://farm${picture.farmId}.staticflickr.com/${picture.serverId}/${picture.id}_${picture.secret}_${picture.size}.jpg`
+
+              context.commit('setPicture', pictureURL)
+            }, (response) => {
+              reject(console.error('Flickr API error: ' + response.message))
+            })
         } else {
           reject(console.error('city not found'))
         }
@@ -106,7 +131,8 @@ export default new Vuex.Store({
             city: settings.city,
             unit: settings.unit,
             unitConverted: convertedUnit,
-            lang: settings.lang
+            lang: settings.lang,
+            pictureUrl: '' // Property must exist: https://vuejs.org/v2/guide/reactivity.html#Change-Detection-Caveats
           }
 
           resolve(userSettings)
@@ -137,12 +163,8 @@ export default new Vuex.Store({
     },
 
     setPicture (state, city) {
-      // if (state.userSettings.pictureUrl == null) {
       state.userSettings.pictureUrl = city.toLowerCase()
       localStorage.setItem('userSettings', JSON.stringify(state.userSettings))
-      /* } else {
-        state.userSettings.pictureUrl = state.userSettings.pictureUrl
-      } */
     }
   }
 })
