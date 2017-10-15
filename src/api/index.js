@@ -16,15 +16,15 @@ export default {
 
   searchPicture (city, perPage = 20) {
     // Search for Flickr picture
-    let URL = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=' + this.keys.flickrPublic + '&tags=' + city + '&per_page=' + perPage + '&format=json&nojsoncallback=1&sort=interestingness-desc&content_type=1&geo_context=2&accuracy=10'
+    let URL = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=' + this.keys.flickrPublic + '&tags=cityscape%2C+' + city + '&per_page=' + perPage + '&format=json&nojsoncallback=1&sort=interestingness-desc&content_type=1&accuracy=11&tag_mode=all'
     return Vue.axios.get(URL)
   },
 
   searchCity (city, unit, lang) {
     // Search for city
-    // let URL = 'api.openweathermap.org/data/2.5/find?q=' + city + '&units=' + unit + '&lang=' + lang + '&APPID=' + this.keys.OWMPublic
+    let URL = '//api.openweathermap.org/data/2.5/find?q=' + city + '&units=' + unit + '&lang=' + lang + '&APPID=' + this.keys.OWMPublic
 
-    let URL = 'https://jsonplaceholder.typicode.com/users'
+    // let URL = 'https://jsonplaceholder.typicode.com/users'
     return Vue.axios.get(URL)
   }
 }

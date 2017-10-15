@@ -1,9 +1,9 @@
 <template>
   <div id="app-background" class="app--background">
     <!--<div class="app&#45;&#45;background_picture" :style="'background-image: url(//riz-cantonais.net/wp-content/uploads/2015/08/chengdu-home.jpg)'"></div>-->
-    <div class="app--background_picture" :style="'background-image: url(' + $store.state.userSettings.pictureUrl + ')'">
+    <div class="app--background_picture" :style="'background-image: url(' + $store.state.userSettings.picturesUrl[Math.floor(Math.random() * $store.state.userSettings.picturesUrl.length)] + ')'">
 
-      <div style="color:#fff; margin:200px;">{{ $store.state.userSettings.pictureUrl }}</div>
+      <div style="color:#fff; margin:200px;">{{ $store.state.userSettings.picturesUrl | randomize }}</div>
 
     </div>
   </div>
@@ -15,7 +15,15 @@
 
     data () {
       return {
-        picture: this.$store.state.userSettings.pictureUrl
+        pictures: this.$store.state.userSettings.picturesUrl
+      }
+    },
+
+    filters: {
+      randomize: function (value) {
+        if (!value) return ''
+        // value = value.toArray()
+        return value[Math.floor(Math.random() * value.length)]
       }
     }
   }

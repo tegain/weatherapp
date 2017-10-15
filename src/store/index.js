@@ -6,54 +6,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    favCity: localStorage.getItem('favCity') || null,
-    favUnit: localStorage.getItem('favUnit') || 'metric',
-    favLang: localStorage.getItem('favLang') || 'en',
     userSettings: JSON.parse(localStorage.getItem('userSettings')) || null,
-    cities: [
-      {
-        'coord': {
-          'lon': 104.07,
-          'lat': 30.67
-        },
-        'weather': [
-          {
-            'id': 701,
-            'main': 'Mist',
-            'description': 'mist',
-            'icon': '50n'
-          }
-        ],
-        'base': 'stations',
-        'main': {
-          'temp': 294.15,
-          'pressure': 1014,
-          'humidity': 88,
-          'temp_min': 294.15,
-          'temp_max': 294.15
-        },
-        'visibility': 4500,
-        'wind': {
-          'speed': 1,
-          'deg': 330
-        },
-        'clouds': {
-          'all': 40
-        },
-        'dt': 1507471200,
-        'sys': {
-          'type': 1,
-          'id': 7461,
-          'message': 0.0607,
-          'country': 'CN',
-          'sunrise': 1507417308,
-          'sunset': 1507459198
-        },
-        'id': 1815286,
-        'name': 'Chengdu',
-        'cod': 200
-      }
-    ]
+    cityDatas: JSON.parse(sessionStorage.getItem('cityDatas')) || []
   },
 
   actions: {
@@ -70,6 +24,7 @@ export default new Vuex.Store({
           // Ajax call here
           API.searchCity(searchedCity, searchedUnit, searchedLang)
             .then((response) => {
+              console.log(response.data)
               resolve(response.data)
 
               context.commit('changeFavCity', searchedCity)
@@ -85,7 +40,7 @@ export default new Vuex.Store({
     searchPicture (context, city) {
       return new Promise((resolve, reject) => {
         if (city) {
-          const picturesPerRequest = 20
+          const picturesPerRequest = 30
 
           /**
            * @doc Flickr API
@@ -97,20 +52,18 @@ export default new Vuex.Store({
               resolve(console.log(response))
 
               // Build Picture URL
-              let randomPictureID = parseInt(Math.random() * picturesPerRequest)
-              console.log(randomPictureID)
-              const datas = response.data.photos
-              const picture = {
-                id: datas.photo[randomPictureID].id,
-                farmId: datas.photo[randomPictureID].farm,
-                serverId: datas.photo[randomPictureID].server,
-                secret: datas.photo[randomPictureID].secret,
+              const datas = response.data.photos.photo
+
+              const pictureDatas = {
                 size: 'h'
               }
 
-              const pictureURL = `https://farm${picture.farmId}.staticflickr.com/${picture.serverId}/${picture.id}_${picture.secret}_${picture.size}.jpg`
+              const pictures = []
+              datas.forEach((picture) => {
+                pictures.push(`https://farm${picture.farm}.staticflickr.com/${picture.server}/${picture.id}_${picture.secret}_${pictureDatas.size}.jpg`)
+              })
 
-              context.commit('setPicture', pictureURL)
+              context.commit('setPicture', pictures)
             }, (response) => {
               reject(console.error('Flickr API error: ' + response.message))
             })
@@ -132,7 +85,7 @@ export default new Vuex.Store({
             unit: settings.unit,
             unitConverted: convertedUnit,
             lang: settings.lang,
-            pictureUrl: '' // Property must exist: https://vuejs.org/v2/guide/reactivity.html#Change-Detection-Caveats
+            picturesUrl: '' // Property must exist: https://vuejs.org/v2/guide/reactivity.html#Change-Detection-Caveats
           }
 
           resolve(userSettings)
@@ -162,8 +115,9 @@ export default new Vuex.Store({
       localStorage.setItem('userSettings', JSON.stringify(settings))
     },
 
-    setPicture (state, city) {
-      state.userSettings.pictureUrl = city.toLowerCase()
+    setPicture (state, pictures) {
+      // state.userSettings.picturesUrl = city.toLowerCase()
+      state.userSettings.picturesUrl = pictures
       localStorage.setItem('userSettings', JSON.stringify(state.userSettings))
     }
   }
