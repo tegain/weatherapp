@@ -28,6 +28,7 @@ export default new Vuex.Store({
               resolve(response.data)
 
               context.commit('changeFavCity', searchedCity)
+              context.commit('setCityDatas', response.data.list[0])
             }, (response) => {
               reject(response)
             })
@@ -55,7 +56,7 @@ export default new Vuex.Store({
               const datas = response.data.photos.photo
 
               const pictureDatas = {
-                size: 'h'
+                size: (this.state.userSettings.device === 'mobile') ? 'b' : 'h'
               }
 
               const pictures = []
@@ -81,6 +82,7 @@ export default new Vuex.Store({
           let convertedUnit = (settings.unit === 'metric') ? '°C' : '°F'
 
           const userSettings = {
+            device: settings.device,
             city: settings.city,
             unit: settings.unit,
             unitConverted: convertedUnit,
@@ -108,6 +110,11 @@ export default new Vuex.Store({
         state.userSettings.city = searchedCity
         localStorage.setItem('userSettings', JSON.stringify(state.userSettings))
       }
+    },
+
+    setCityDatas (state, cityDatas) {
+      state.cityDatas = cityDatas
+      sessionStorage.setItem('cityDatas', JSON.stringify(state.cityDatas))
     },
 
     setUserSettings (state, settings) {
