@@ -41,19 +41,29 @@
 </script>
 
 <style type="text/css" lang="scss">
-  .app--weather_card {
-    text-align: left;
-    line-height: 1.1;
-    font-size: 1.5em;
-    color: #fff;
+  .app {
+    &--weather {
+      padding: 3rem;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
 
-    h1 {
-      margin-bottom: .5rem;
-    }
+      &_card {
+        text-align: left;
+        line-height: 1.1;
+        font-size: 1.5em;
+        color: #fff;
 
-    .temperature,
-    .unit {
-      font-size: 1.5rem;
+        h1 {
+          margin-bottom: .5rem;
+        }
+
+        .temperature,
+        .unit {
+          font-size: 1.5rem;
+        }
+      }
     }
   }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="app--settings">
-    <form action="#" v-on:submit.prevent="submitSettings">
+    <form action="#" v-on:submit.prevent="submitSettings" class="app--settings_form">
       <input id="search-city" type="text" placeholder="Search city" v-model="settingsCity" required>
 
       <select name="search-unit" id="search-unit" v-model="settingsUnit">
@@ -50,28 +50,57 @@
 <style type="text/css" lang="scss">
   .app--settings {
     width: 90%;
-    max-width: 420px;
+    max-width: 640px;
     margin: 0 auto;
+
+    &_form {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      border-radius: 2rem;
+      box-shadow: 0 1rem 1.5rem rgba(#000, .25);
+    }
 
     input {
       padding: .75rem 1.5rem;
-      border-radius: 2rem;
+      background: none;
       border: none;
+      border-right: 1px solid #eee;
       display: block;
-      margin-bottom: .5rem;
-      width: 100%;
+      width: 50%;
+
+      &[type="text"] {
+        border-top-left-radius: 2rem;
+        border-bottom-left-radius: 2rem;
+        background: #fff;
+      }
+
+      &[type="submit"] {
+        border: none;
+        width: 25%;
+        cursor: pointer;
+        border-top-right-radius: 2rem;
+        border-bottom-right-radius: 2rem;
+        background: #7b4397;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #dc2430, #7b4397);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #dc2430, #7b4397); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
     }
 
     select {
       display: inline-block;
-      width: 48%;
+      width: 15%;
       border: none;
-      padding: .75rem 1.5rem;
-      border-radius: 2rem;
-      margin-bottom: .5rem;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
+      border-right: 1px solid #eee;
+      padding: .75rem 1rem;
+      background: #fff;
+      // -webkit-appearance: none;
+      // -moz-appearance: none;
+      // appearance: none;
     }
   }
 </style>

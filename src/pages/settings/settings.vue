@@ -16,12 +16,9 @@
 </script>
 
 <style type="text/css" lang="scss">
-  .app--wrapper {
-    padding-top: 60px;
-  }
 
   [data-template="index"] {
-    background: #202020;
+    background: #1a1429;
     height: 100vh;
   }
 </style>
