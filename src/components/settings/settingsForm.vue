@@ -81,9 +81,7 @@
         cursor: pointer;
         border-top-right-radius: 2rem;
         border-bottom-right-radius: 2rem;
-        background: #7b4397;  /* fallback for old browsers */
-        background: -webkit-linear-gradient(to right, #dc2430, #7b4397);  /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to right, #dc2430, #7b4397); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background-image: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
 
         color: #fff;
         text-transform: uppercase;
@@ -98,9 +96,6 @@
       border-right: 1px solid #eee;
       padding: .75rem 1rem;
       background: #fff;
-      // -webkit-appearance: none;
-      // -moz-appearance: none;
-      // appearance: none;
     }
   }
 </style>
