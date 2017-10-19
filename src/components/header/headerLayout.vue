@@ -1,6 +1,5 @@
 <template>
   <div id="app-header" class="app--header">
-    <router-link :to="{ name: 'home' }">App</router-link>
     <app-search></app-search>
   </div>
 </template>
@@ -12,5 +11,8 @@
 </script>
 
 <style type="text/css" lang="scss">
-
+  .app--header {
+    position: relative;
+    z-index: 3;
+  }
 </style>

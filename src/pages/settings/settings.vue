@@ -18,7 +18,7 @@
 <style type="text/css" lang="scss">
 
   [data-template="index"] {
-    background: #1a1429;
+    /*background: #1a1429;*/
     height: 100vh;
 
     h1 {

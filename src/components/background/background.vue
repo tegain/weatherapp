@@ -19,7 +19,6 @@
     filters: {
       randomize: function (value) {
         if (!value) return ''
-        // value = value.toArray()
         return value[Math.floor(Math.random() * value.length)]
       }
     }
@@ -30,18 +29,18 @@
   .app--background {
     position: fixed;
     top: 0;
-    left: 0;
-    z-index: 0;
-    width: 100%;
+    right: 0;
+    z-index: 2;
+    width: 55vw;
     height: 100%;
     background: #1a1429;
 
     &_picture {
       position: absolute;
-      top: -2rem;
-      left: -2rem;
-      bottom: -2rem;
-      right: -2rem;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
       background-repeat: no-repeat;
       background-size: cover;
       background-position: 50% 50%;

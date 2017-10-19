@@ -13,6 +13,7 @@ html {
 }
 
 body {
+  background: #1a1429;
   margin: 0;
   font-family: 'Playfair Display', serif;
   -webkit-font-smoothing: antialiased;
@@ -24,20 +25,23 @@ body {
   color: #1a1429;
 
   &--wrapper {
-    padding-top: 60px;
+
   }
 
   &--main {
+    padding-top: 60px;
     position: relative;
     z-index: 1;
+    height: 100vh;
   }
 }
 
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity .5s
+  transition: opacity .5s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
