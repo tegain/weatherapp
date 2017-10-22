@@ -1,8 +1,8 @@
 <template>
   <div id="app-weather" class="app--weather_card">
-    <h1>{{ $store.state.userSettings.city | capitalize }}</h1>
     <span class="temperature">{{ $store.state.cityDatas.main.temp | roundize }}</span>
     <span class="unit">{{ $store.state.userSettings.unitConverted }}</span>
+    <h1>{{ $store.state.userSettings.city | capitalize }}</h1>
   </div>
 </template>
 
@@ -44,22 +44,32 @@
   .app {
     &--weather {
       padding: 3rem;
-      position: fixed;
-      bottom: 0;
+      position: absolute;
+      top: 0;
       left: 0;
       width: 100%;
 
       &_card {
         text-align: left;
         line-height: 1.1;
-        font-size: 1.5em;
-        color: #fff;
+        font-size: 1em;
+        color: #1a1429;
 
         h1 {
+          margin-top: 0;
           margin-bottom: .5rem;
         }
 
         .temperature,
+        .unit {
+          display: inline-block;
+          vertical-align: middle;
+        }
+
+        .temperature {
+          font-size: 5.5rem;
+        }
+
         .unit {
           font-size: 1.5rem;
         }

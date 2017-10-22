@@ -14,5 +14,7 @@
   .app--header {
     position: relative;
     z-index: 3;
+    top: 50%;
+    right: -11vw;
   }
 </style>

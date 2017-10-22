@@ -26,7 +26,7 @@
 
     .app--main {
       background: #fff;
-      padding-right: 40vw;
+      padding-right: 55vw;
       transform: scale(1,1);
       transform-origin: 100% 0;
       transition: transform .5s;

@@ -1,6 +1,5 @@
 <template>
   <div id="app-background" class="app--background">
-    <!--<div class="app&#45;&#45;background_picture" :style="'background-image: url(//riz-cantonais.net/wp-content/uploads/2015/08/chengdu-home.jpg)'"></div>-->
     <div class="app--background_picture" :style="'background-image: url(' + $store.state.userSettings.picturesUrl[Math.floor(Math.random() * $store.state.userSettings.picturesUrl.length)] + ')'">
     </div>
   </div>
@@ -45,6 +44,8 @@
       background-size: cover;
       background-position: 50% 50%;
       opacity: .3;
+      transition: opacity .4s;
+      transition-delay: .5s;
     }
   }
 </style>
