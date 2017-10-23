@@ -7,7 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     userSettings: JSON.parse(localStorage.getItem('userSettings')) || null,
-    cityDatas: JSON.parse(sessionStorage.getItem('cityDatas')) || []
+    cityDatas: JSON.parse(sessionStorage.getItem('cityDatas')) || null
   },
 
   actions: {
@@ -126,6 +126,14 @@ export default new Vuex.Store({
       // state.userSettings.picturesUrl = city.toLowerCase()
       state.userSettings.picturesUrl = pictures
       localStorage.setItem('userSettings', JSON.stringify(state.userSettings))
+    }
+  },
+
+  getters: {
+    randomPicture: (state, getters) => {
+      if (state.userSettings != null) {
+        return state.userSettings.picturesUrl[Math.floor(Math.random() * state.userSettings.picturesUrl.length)]
+      }
     }
   }
 })

@@ -1,7 +1,6 @@
 <template>
   <div id="app-background" class="app--background">
-    <div class="app--background_picture" :style="'background-image: url(' + $store.state.userSettings.picturesUrl[Math.floor(Math.random() * $store.state.userSettings.picturesUrl.length)] + ')'">
-    </div>
+    <div class="app--background_picture" :data-bg="$store.getters.randomPicture"></div>
   </div>
 </template>
 
@@ -9,17 +8,16 @@
   export default {
     name: 'appBackground',
 
-    data () {
-      return {
-        pictures: this.$store.state.userSettings.picturesUrl
-      }
+    mounted: function () {
+      let $elt = document.querySelector('.app--background_picture')
+      setTimeout(() => {
+        $elt.style.backgroundImage = 'url(' + $elt.getAttribute('data-bg') + ')'
+      }, 500)
     },
 
-    filters: {
-      randomize: function (value) {
-        if (!value) return ''
-        return value[Math.floor(Math.random() * value.length)]
-      }
+    updated: function () {
+      let $elt = document.querySelector('.app--background_picture')
+      $elt.style.backgroundImage = 'url(' + $elt.getAttribute('data-bg') + ')'
     }
   }
 </script>

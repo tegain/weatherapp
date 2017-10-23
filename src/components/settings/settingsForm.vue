@@ -58,7 +58,7 @@
       flex-flow: row nowrap;
       justify-content: space-between;
       border-radius: 2rem;
-      box-shadow: 0 1rem 1.5rem rgba(#000, .25);
+      box-shadow: 0 1rem 1.5rem rgba(#06294f, .25);
     }
 
     input {

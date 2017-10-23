@@ -21,8 +21,8 @@
 
 <style type="text/css" lang="scss">
   [data-template="app"] {
-    padding-left: 4rem;
-    background: #f093fb;
+    padding-left: 2rem;
+    background-image: linear-gradient(0deg, #f093fb 0%, #f5576c 100%);
 
     .app--main {
       background: #fff;
@@ -34,7 +34,18 @@
       &.slide-enter,
       &.slide-leave-to {
         transform: scale(0, 1);
+
+        .app--background {
+          transform: scale(0, 1);
+        }
       }
+    }
+
+    .app--background {
+      transform: scale(1,1);
+      transform-origin: 100% 0;
+      transition: .3s;
+      transition-delay: .25s;
     }
   }
 </style>

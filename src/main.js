@@ -19,7 +19,7 @@ Components.forEach((component) => {
  */
 router.beforeEach((to, from, next) => {
   if (to.name === 'home') {
-    if (store.state.userSettings == null) {
+    if (store.state.userSettings == null || store.state.cityDatas == null) {
       next('/settings')
     } else {
       next()
